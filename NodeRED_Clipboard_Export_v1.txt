@@ -1,0 +1,455 @@
+[
+    {
+        "id": "8ad1d4fe125b05cf",
+        "type": "switch",
+        "z": "9d6f029a4f5e0b27",
+        "name": "commands",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "melkers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "alle melkers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "dumpert url",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "9a2c7b39f7335507"
+            ],
+            [
+                "27783ef4fe7229eb",
+                "059b0a63d35bef78"
+            ],
+            [
+                "3c3c7f1c907a5629"
+            ]
+        ]
+    },
+    {
+        "id": "8d89aaade923d8a7",
+        "type": "function",
+        "z": "9d6f029a4f5e0b27",
+        "name": "1 melker",
+        "func": "msg.channel = \"297295376275341313\"\nmsg.payload = msg.payload.items[0].media[(msg.data.cleanContent)].variants[0].uri\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 320,
+        "wires": [
+            [
+                "d5cc46e610f394c8"
+            ]
+        ]
+    },
+    {
+        "id": "9a2c7b39f7335507",
+        "type": "http request",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api-live.dumpert.nl/mobile_api/json/info/100018197_5d82f342",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "74470dc44a744868"
+            ]
+        ]
+    },
+    {
+        "id": "618ed3fc7c3ff002",
+        "type": "json",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 990,
+        "y": 320,
+        "wires": [
+            [
+                "8d89aaade923d8a7"
+            ]
+        ]
+    },
+    {
+        "id": "74470dc44a744868",
+        "type": "change",
+        "z": "9d6f029a4f5e0b27",
+        "name": "vrijmibo clean",
+        "rules": [
+            {
+                "t": "change",
+                "p": "data.cleanContent",
+                "pt": "msg",
+                "from": "melkers ",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 320,
+        "wires": [
+            [
+                "618ed3fc7c3ff002"
+            ]
+        ]
+    },
+    {
+        "id": "d35707be96ef7734",
+        "type": "http request",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "credentials": {
+            "user": "",
+            "password": ""
+        },
+        "x": 1010,
+        "y": 440,
+        "wires": [
+            [
+                "8e09f3baf7f17174"
+            ]
+        ]
+    },
+    {
+        "id": "8e09f3baf7f17174",
+        "type": "json",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 990,
+        "y": 480,
+        "wires": [
+            [
+                "ce7f665653acc33f"
+            ]
+        ]
+    },
+    {
+        "id": "4543171e017fdcd1",
+        "type": "lower-case",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "8ad1d4fe125b05cf"
+            ]
+        ]
+    },
+    {
+        "id": "269df72cbc61e3c8",
+        "type": "split",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1010,
+        "y": 560,
+        "wires": [
+            [
+                "a5ab4fb1bdae6e8f"
+            ]
+        ]
+    },
+    {
+        "id": "ce7f665653acc33f",
+        "type": "change",
+        "z": "9d6f029a4f5e0b27",
+        "name": "array set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.items[0].media",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 520,
+        "wires": [
+            [
+                "269df72cbc61e3c8"
+            ]
+        ]
+    },
+    {
+        "id": "a5ab4fb1bdae6e8f",
+        "type": "function",
+        "z": "9d6f029a4f5e0b27",
+        "name": "Alle melkers",
+        "func": "msg.channel = \"297295376275341313\"\nmsg.payload = msg.payload.variants[0].uri\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 560,
+        "wires": [
+            [
+                "d5cc46e610f394c8"
+            ]
+        ]
+    },
+    {
+        "id": "27783ef4fe7229eb",
+        "type": "function",
+        "z": "9d6f029a4f5e0b27",
+        "name": "Smikkelkont",
+        "func": "msg.channel = \"875366509046825010\"\nmsg.payload = \"Ouwe smikkelkont die je er bent, kijk maar snel in #shitposting_nsfw\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 380,
+        "wires": [
+            [
+                "d5cc46e610f394c8"
+            ]
+        ]
+    },
+    {
+        "id": "08110c3a875871d7",
+        "type": "file",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "filename": "dumpertID",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 570,
+        "y": 580,
+        "wires": [
+            [
+                "ed1e07aa0fb3b58e"
+            ]
+        ]
+    },
+    {
+        "id": "3c3c7f1c907a5629",
+        "type": "change",
+        "z": "9d6f029a4f5e0b27",
+        "name": "vrijmibo clean",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "dumpert url https://www.dumpert.nl/item/",
+                "fromt": "str",
+                "to": "https://api-live.dumpert.nl/mobile_api/json/info/",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 520,
+        "wires": [
+            [
+                "08110c3a875871d7"
+            ]
+        ]
+    },
+    {
+        "id": "059b0a63d35bef78",
+        "type": "file in",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "filename": "dumpertID",
+        "format": "lines",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 690,
+        "y": 440,
+        "wires": [
+            [
+                "d2978f6a0e6be4cf"
+            ]
+        ]
+    },
+    {
+        "id": "d7d91a3abec22591",
+        "type": "inject",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 580,
+        "wires": [
+            [
+                "08110c3a875871d7"
+            ]
+        ]
+    },
+    {
+        "id": "d2978f6a0e6be4cf",
+        "type": "change",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 440,
+        "wires": [
+            [
+                "d35707be96ef7734"
+            ]
+        ]
+    },
+    {
+        "id": "9f84ea48ebb2d821",
+        "type": "discordMessage",
+        "z": "9d6f029a4f5e0b27",
+        "name": "van Discord",
+        "token": "",
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "4543171e017fdcd1"
+            ]
+        ]
+    },
+    {
+        "id": "bac1336c59fd4626",
+        "type": "discordMessageManager",
+        "z": "9d6f029a4f5e0b27",
+        "name": "naar Discord",
+        "channel": "",
+        "token": "",
+        "x": 1390,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5cc46e610f394c8",
+        "type": "delay",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1290,
+        "y": 400,
+        "wires": [
+            [
+                "bac1336c59fd4626"
+            ]
+        ]
+    },
+    {
+        "id": "ed1e07aa0fb3b58e",
+        "type": "debug",
+        "z": "9d6f029a4f5e0b27",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 580,
+        "wires": []
+    }
+]

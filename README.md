@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://github.com/Donixon/vrijmiboGET/blob/main/DumpertVRIJMIBOGET.png">
+</p>
 # VrijMiBo Discord image poster
 De lads en ik kijken graag iedere vrijdag de Dumpert Vrijmibo plaatjes. Echter Dumpert laatst besloten om de NSFW plaatjes achter een inlog te gooien. Heeft niemand natuurlijk zin in. Daarom moest er iets bedacht worden om deze vrijmibo plaatjes graties te kunnen zien. 
 In NodeRED heb ik daarvoor iets moois in elkaar gegooid. 
@@ -29,7 +32,9 @@ o	dumpert url https://www.dumpert.nl/item/100018197_5d82f342
 Nu alles opgezet is en de Dumpert-URL van de Vrijmibo bekend is, kan je in Discord het command gooien: alle melkers . Deze zorgt ervoor dat er in de juiste channel (voorheen neergezet) alle plaatjes worden gepost die in de bovengenoemde URL stonden. 
 
 ## Uitleg Flow
-![alt text](https://github.com/Donixon/vrijmiboGET/blob/main/NodeRED_Uitleg_flow_v1.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Donixon/vrijmiboGET/blob/main/NodeRED_Uitleg_flow_v1.png">
+</p>
 * **Geel – Discord out**
     * De Discord-node checkt alle messages die binnenkomen
     * De lower-case-node zet alle payloads die binnenkomen om in, najah, lower-case letters. Dit zorgt ervoor dat het niet uitmaakt hoe je het command in Discord stuurt:

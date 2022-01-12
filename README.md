@@ -29,6 +29,7 @@ o	dumpert url https://www.dumpert.nl/item/100018197_5d82f342
 Nu alles opgezet is en de Dumpert-URL van de Vrijmibo bekend is, kan je in Discord het command gooien: alle melkers . Deze zorgt ervoor dat er in de juiste channel (voorheen neergezet) alle plaatjes worden gepost die in de bovengenoemde URL stonden. 
 
 ## Uitleg Flow
+![alt text](https://github.com/Donixon/vrijmiboGET/blob/main/NodeRED_Uitleg_flow_v1.png?raw=true)
 * **Geel – Discord out**
     * De Discord-node checkt alle messages die binnenkomen
     * De lower-case-node zet alle payloads die binnenkomen om in, najah, lower-case letters. Dit zorgt ervoor dat het niet uitmaakt hoe je het command in Discord stuurt:
